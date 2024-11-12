@@ -28,7 +28,7 @@ public class BookingEntity {
 	@JoinColumn(name = "id", nullable = true)
 	private CustomerEntity customer;
 
-	@OneToOne(mappedBy = "booking")
+	@OneToOne(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
 	private BillingEntity billing;
 
 }

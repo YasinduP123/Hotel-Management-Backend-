@@ -24,10 +24,12 @@ public class RoomController {
 	}
 
 	@GetMapping("/all")
-	public List<Room> getAll(@RequestParam(required = false) Long id){
+	public List<Room> getAll(@RequestParam(required = false) Long id , Integer roomNumber){
 
 		if(id != null){
 			return roomService.findById(id);
+		}else if(roomNumber != null){
+			return roomService.findByRoomNumber(roomNumber);
 		}
 
 		List<Room> all = roomService.getAll();
@@ -35,7 +37,7 @@ public class RoomController {
 		return all;
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/delete/{roomId}")
 	public void delete(@PathVariable Long roomId){
 
 		if(roomId != null){
@@ -44,8 +46,8 @@ public class RoomController {
 
 	}
 
-	@PutMapping
-	public void update(@PathVariable Room room){
+	@PutMapping("update")
+	public void update(@RequestBody Room room){
 
 		if(room != null){
 			roomService.update(room);

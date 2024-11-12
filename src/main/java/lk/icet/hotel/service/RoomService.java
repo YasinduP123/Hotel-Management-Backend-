@@ -14,4 +14,6 @@ public interface RoomService {
 	void deleteById(Long roomId);
 
 	void update(Room room);
+
+	List<Room> findByRoomNumber(Integer roomNumber);
 }

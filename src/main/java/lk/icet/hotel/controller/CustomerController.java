@@ -23,26 +23,20 @@ public class CustomerController {
 
 	final CustomerService customerService;
 
-	@PostMapping("/set-customer")
-	public void getCustomer(@RequestBody Customer customer){
-
-//		byte[] imageBytes = customer.getImage().getBytes(); // Get the bytes from the image string
-//
-//		byte[] encodedImage = Base64.getDecoder().decode(imageBytes);
-//		customer.setImageArray(encodedImage);
-//
-//		log.info("Customer ID: {}", customer.getImageArray());
-
+	@PostMapping("/save")
+	public void saveCustomer(@RequestBody Customer customer){
 		customerService.saveCustomer(customer);
-		// Save the customer
 	}
 
 	@GetMapping("/all")
-	public List<Customer> sendCustomers(@RequestParam(required = false) Long id){
+	public List<Customer> getAll(@RequestParam(required = false) Long id , String nic){
 
 		if (id != null){
 			return customerService.searchById(id);
+		} else if (nic != null) {
+			return customerService.searchByNic(nic);
 		}
+
 		return customerService.customerList();
 
 	}

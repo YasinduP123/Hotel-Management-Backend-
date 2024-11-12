@@ -1,7 +1,6 @@
 package lk.icet.hotel.entity;
 
 import jakarta.persistence.*;
-import lk.icet.hotel.util.RoomType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,8 +16,7 @@ public class RoomEntity {
 	private Long roomId;
 	@Column(unique = true)
 	private Integer roomNumber;
-	@Enumerated(EnumType.STRING)
-	private RoomType roomType;
+	private String roomType;
 	private Double pricePerHour;
 	private Double pricePerDay;
 }

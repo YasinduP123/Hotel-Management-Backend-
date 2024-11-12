@@ -6,6 +6,8 @@ import lk.icet.hotel.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,15 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public void update(Room room) {
 		roomRepository.save(mapper.map(room, RoomEntity.class));
+	}
+
+	@Override
+	public List<Room> findByRoomNumber(Integer roomNumber) {
+		List<Room> rooms = new ArrayList<>();
+
+		rooms.add(mapper.map(roomRepository.findByRoomNumber(roomNumber), Room.class));
+
+		return rooms;
 	}
 
 
