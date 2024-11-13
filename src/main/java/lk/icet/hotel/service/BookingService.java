@@ -16,4 +16,6 @@ public interface BookingService {
 	List<Booking> findById(Long id);
 
 	void deleteById(Long bookingId);
+
+	List<Booking> findByCategory(String roomType);
 }

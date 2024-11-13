@@ -1,11 +1,13 @@
 package lk.icet.hotel.repository;
 
-import lk.icet.hotel.dto.Booking;
 import lk.icet.hotel.entity.BookingEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface BookingRepository extends JpaRepository<BookingEntity,Long> {
 
+	List<BookingEntity> findByRoomType(String roomType);
 }

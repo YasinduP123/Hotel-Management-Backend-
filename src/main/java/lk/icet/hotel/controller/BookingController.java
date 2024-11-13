@@ -18,22 +18,25 @@ public class BookingController {
 
 	final BookingService bookingService;
 
-	@PostMapping("/set-booking")
+	@PostMapping("/save")
 	public void setBooking(@RequestBody Booking booking){
 		log.info(booking+"");
 		bookingService.saveBooking(booking);
 	}
 
 	@GetMapping("/all")
-	public List<Booking> getBookings(@RequestParam(required = false) Long id){
+	public List<Booking> getBookings(@RequestParam(required = false) Long id ,String roomType){
 
 		if (id != null) {
 			return bookingService.findById(id);
+		}else if(roomType != null){
+			return bookingService.findByCategory(roomType);
 		}
+
 		return bookingService.getAllBookings();
 	}
 
-	@PutMapping("/update-booking")
+	@PutMapping("/update")
 	public void updateBooking(@RequestBody Booking updateBooking){
 		bookingService.updateBooking(updateBooking);
 	}

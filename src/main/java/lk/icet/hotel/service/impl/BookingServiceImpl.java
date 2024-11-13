@@ -55,5 +55,12 @@ public class BookingServiceImpl implements BookingService {
 
 	}
 
+	@Override
+	public List<Booking> findByCategory(String roomType) {
+		List<Booking> bookingList = new ArrayList<>();
+		bookingRepository.findByRoomType(roomType).forEach(bookingEntity -> bookingList.add(mapper.map(bookingEntity, Booking.class)));
+		return bookingList;
+	}
+
 
 }
