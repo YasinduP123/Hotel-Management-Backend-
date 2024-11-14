@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -25,12 +26,17 @@ public class BookingController {
 	}
 
 	@GetMapping("/all")
-	public List<Booking> getBookings(@RequestParam(required = false) Long id ,String roomType){
+	public List<Booking> getBookings(@RequestParam(required = false) Long id , String roomType , Integer month, Integer year){
 
 		if (id != null) {
 			return bookingService.findById(id);
 		}else if(roomType != null){
 			return bookingService.findByCategory(roomType);
+		} else if (month != null || year != null) {
+			return bookingService.findByCheckInDate(
+					year != null ? year : LocalDate.now().getYear(),
+					month != null ? month : 1
+			);
 		}
 
 		return bookingService.getAllBookings();

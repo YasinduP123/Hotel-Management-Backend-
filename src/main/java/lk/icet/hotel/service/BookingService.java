@@ -18,4 +18,6 @@ public interface BookingService {
 	void deleteById(Long bookingId);
 
 	List<Booking> findByCategory(String roomType);
+
+	List<Booking> findByCheckInDate(Integer year, Integer month);
 }

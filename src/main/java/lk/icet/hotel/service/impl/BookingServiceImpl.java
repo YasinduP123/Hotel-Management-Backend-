@@ -62,5 +62,11 @@ public class BookingServiceImpl implements BookingService {
 		return bookingList;
 	}
 
+	@Override
+	public List<Booking> findByCheckInDate(Integer year, Integer month) {
+		List<Booking> bookingList = new ArrayList<>();
+		bookingRepository.findByCheckInDate(year,month).forEach(bookingEntity -> bookingList.add(mapper.map(bookingEntity, Booking.class)));
+		return bookingList;
+	}
 
 }

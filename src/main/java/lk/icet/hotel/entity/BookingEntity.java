@@ -19,6 +19,8 @@ public class BookingEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long bookingId;
 	private LocalDate bookingDate;
+
+	@Column(name = "check_in_date")
 	private LocalDate checkInDate;
 	private LocalDate checkOutDate;
 	private String roomType;
