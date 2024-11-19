@@ -18,5 +18,5 @@ public class Booking {
 	private LocalDate checkOutDate;
 	private String roomType;
 	private Customer customer;
-
+	private String email;
 }

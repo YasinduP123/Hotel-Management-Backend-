@@ -28,7 +28,9 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> customerList() {
 		List<Customer> customerList = new ArrayList<>();
-		repository.findAll().forEach(customer ->customerList.add(mapper.map(customer,Customer.class)));
+		repository.findAll().forEach(customer -> {
+			customerList.add(mapper.map(customer, Customer.class));
+		});
 		return customerList;
 	}
 

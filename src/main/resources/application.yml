@@ -8,3 +8,5 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+ # Relative path for file uploads
+

@@ -36,8 +36,7 @@ public class CustomerEntity {
 
 	private String gender;
 
-	@Lob
-	private byte[] imageArray;
+	private String image;
 
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<BookingEntity> bookings;

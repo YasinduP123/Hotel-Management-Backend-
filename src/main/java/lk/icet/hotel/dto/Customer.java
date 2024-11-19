@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.nio.file.Path;
+
 @Data
 @ToString
 @NoArgsConstructor
@@ -19,6 +21,7 @@ public class Customer {
 	private String dob;
 	private String gender;
 	private String image;
+	private Path imageGet;
 	private byte[] imageArray;
 
 	public Customer(Long id, String name, String nic, String address, String contactNumber, String email, String dob, String gender, String image) {
@@ -31,6 +34,17 @@ public class Customer {
 		this.dob = dob;
 		this.gender = gender;
 		this.image = image;
+	}
+	public Customer(Long id, String name, String nic, String address, String contactNumber, String email, String dob, String gender, Path image) {
+		this.id = id;
+		this.name = name;
+		this.nic = nic;
+		this.address = address;
+		this.contactNumber = contactNumber;
+		this.email = email;
+		this.dob = dob;
+		this.gender = gender;
+		this.imageGet = image;
 	}
 
 
