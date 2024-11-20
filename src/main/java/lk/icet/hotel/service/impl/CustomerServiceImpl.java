@@ -7,11 +7,8 @@ import lk.icet.hotel.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,9 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> customerList() {
 		List<Customer> customerList = new ArrayList<>();
-		repository.findAll().forEach(customer -> {
-			customerList.add(mapper.map(customer, Customer.class));
-		});
+		repository.findAll().forEach(customer -> customerList.add(mapper.map(customer, Customer.class)));
 		return customerList;
 	}
 
@@ -47,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> searchById(Long id){
 		List<Customer> customers = new ArrayList<>();
-		repository.findById(id).map(customerEntity -> customers.add(mapper.map(customerEntity,Customer.class)));
+		customers.add(mapper.map(repository.findById(id),Customer.class));
 		return customers;
 	}
 
@@ -64,6 +59,5 @@ public class CustomerServiceImpl implements CustomerService {
 		repository.findByNic(nic).forEach(customerEntity -> customerList.add(mapper.map(customerEntity,Customer.class)));
 		return customerList;
 	}
-
 
 }
