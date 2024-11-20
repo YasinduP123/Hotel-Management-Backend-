@@ -8,5 +8,6 @@ import org.springframework.stereotype.Component;
 public class StoreOtp {
 
 	private String otp;
+	private String email;
 
 }

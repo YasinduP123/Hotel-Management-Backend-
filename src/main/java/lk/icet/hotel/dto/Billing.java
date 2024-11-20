@@ -17,13 +17,13 @@ public class Billing {
 	private LocalDate date;
 	private String amount;
 	private String paymentStatus;
-	private Booking booking;
+	private Long bookingId;
 
-	public Billing(LocalDate date, String amount, String paymentStatus, Booking booking) {
+	public Billing(LocalDate date, String amount, String paymentStatus, Long bookingId) {
 		this.date = date;
 		this.amount = amount;
 		this.paymentStatus = paymentStatus;
-		this.booking = booking;
+		this.bookingId = bookingId;
 	}
 
 }

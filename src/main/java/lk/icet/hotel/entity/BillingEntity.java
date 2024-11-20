@@ -22,15 +22,15 @@ public class BillingEntity {
 	private String amount;
 	private String paymentStatus;
 
-	@OneToOne
-	@JoinColumn(name = "booking_id")
-	private BookingEntity booking;
+//	@OneToOne
+//	@JoinColumn(name = "booking_id")
+	private Long bookingId;
 
-	public BillingEntity(LocalDate date, String amount, String paymentStatus, BookingEntity bookingEntity) {
+	public BillingEntity(LocalDate date, String amount, String paymentStatus, Long bookingId) {
 		this.date = date;
 		this.amount = amount;
 		this.paymentStatus = paymentStatus;
-		this.booking = bookingEntity;
+		this.bookingId = bookingId;
 	}
 
 }

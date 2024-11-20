@@ -49,12 +49,19 @@ public class UserController {
 
 
 	@GetMapping("/all")
-	public List<User> get(){
+	public List<User> get(@RequestParam(required = false) String email){
+
+		if (email != null) {
+			List<User> byEmail = userService.findByEmail(email);
+			System.out.println(byEmail);
+			return byEmail;
+		}
+
 		return userService.getAll();
 	}
 
 	@GetMapping("/validate")
-	public List<User> validate(@RequestParam(required = false) String password , String userName){
+	public List<User> validate(@RequestParam String password , String userName){
 		if(password != null && userName != null){
 			return userService.validateUserLogin(userName,password);
 		}
@@ -63,6 +70,7 @@ public class UserController {
 
 	@GetMapping("/generate-otp/{email}")
 	public String sendOtp(@PathVariable String email){
+		otp.setEmail(email);
 		try {
 			return userService.sendEmail(email);
 		} catch (MessagingException e) {
@@ -72,8 +80,13 @@ public class UserController {
 	}
 
 	@GetMapping("/get-otp")
-	public String getOtp(){
-		return otp.getOtp();
+	public StoreOtp getOtp(){
+		return otp;
+	}
+
+	@PutMapping("/reset")
+	public void resetPassword(@RequestBody User user ){
+		userService.update(user);
 	}
 
 }

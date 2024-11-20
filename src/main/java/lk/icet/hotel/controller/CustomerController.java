@@ -55,50 +55,35 @@ public class CustomerController {
 	@GetMapping("/images/{filename}")
 	public ResponseEntity<Resource> getImage(@PathVariable String filename) {
 		try {
-			// Log the filename being requested
-			System.out.println("Requested filename: " + filename);
-
-			// Construct the full path
-			Path imagePath = Paths.get("E:\\Project_Intelij\\Frame Works (Spring Boot)\\Hotel_Management_System\\src\\main\\resources\\imagesProfileImagesFolder").resolve(filename);
-
-			// Log the resolved path
-			System.out.println("Resolved file path: " + imagePath.toString());
-
-			// Load the file as a resource
+			log.info("Requested filename: " + filename);
+			Path imagePath = Paths.get("E:\\Project_Intelij\\Frame Works (Spring Boot)\\Hotel\\Hotel_Management_System\\src\\main\\resources\\imagesProfileImagesFolder").resolve(filename);
+			log.info("Resolved file path: " + imagePath.toString());
 			Resource resource = new UrlResource(imagePath.toUri());
-
-			// Check if the file exists and is readable
 			if (!resource.exists() || !resource.isReadable()) {
-				System.out.println("File not found or not readable: " + imagePath.toString());
+				log.info("File not found or not readable: " + imagePath.toString());
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 			}
-
-			// Determine content type
 			String contentType = Files.probeContentType(imagePath);
 			if (contentType == null) {
 				contentType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
 			}
-
 			return ResponseEntity.ok()
 					.contentType(MediaType.parseMediaType(contentType))
 					.body(resource);
-
 		} catch (IOException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
 
-
-
 	@GetMapping("/all")
 	public List<Customer> getAll(@RequestParam(required = false) Long id, @RequestParam(required = false) String nic) {
 		List<Customer> customerList;
-
+		String path = "customer/images/";
 		if (id != null) {
 			customerList = customerService.searchById(id);
 			customerList.forEach(customer -> {
 				String imageUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
-						.path("customer/images/")
+						.path(path)
 						.path(customer.getImage().substring(customer.getImage().lastIndexOf("\\") + 1))
 						.toUriString();
 				customer.setImage(imageUrl);
@@ -107,7 +92,7 @@ public class CustomerController {
 			customerList = customerService.searchByNic(nic);
 			customerList.forEach(customer -> {
 				String imageUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
-						.path("customer/images/")
+						.path(path)
 						.path(customer.getImage().substring(customer.getImage().lastIndexOf("\\") + 1))
 						.toUriString();
 				customer.setImage(imageUrl);
@@ -118,7 +103,7 @@ public class CustomerController {
 
 				if(customer.getImage()!=null){
 				String imageUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
-						.path("customer/images/")
+						.path(path)
 						.path(customer.getImage().substring(customer.getImage().lastIndexOf("\\") + 1))
 						.toUriString();
 				customer.setImage(imageUrl);

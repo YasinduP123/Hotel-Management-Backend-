@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -114,7 +115,17 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	@Override
+	public List<User> findByEmail(String email) {
+		List<User> users = new ArrayList<>();
+		userRepository.findByEmail(email).forEach(userEntity -> users.add(mapper.map(userEntity, User.class)));
+		return users;
+	}
 
+	@Override
+	public void update(User user) {
+		userRepository.save(mapper.map(user, UserEntity.class));
+	}
 
 
 }
