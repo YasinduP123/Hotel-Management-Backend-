@@ -5,7 +5,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.Session;
 import lk.icet.hotel.dto.User;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+
 import java.util.List;
 
 public interface UserService {
