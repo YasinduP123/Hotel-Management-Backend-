@@ -16,7 +16,7 @@ public class ImgUpload {
 	private ImgUpload(){}
 	public static String saveImg(String uploadDir, String fileName, MultipartFile multipartFile) throws IOException {
 
-		Path uploadPath = Paths.get("E:\\Project_Intelij\\Frame Works (Spring Boot)\\Hotel_Management_System\\src\\main\\resources\\images"+uploadDir);
+		Path uploadPath = Paths.get("E:\\Project_Intelij\\Frame Works (Spring Boot)\\Hotel\\Hotel_Management_System\\src\\main\\resources\\images"+uploadDir);
 		if (!Files.exists(uploadPath)) {
 			Files.createDirectories(uploadPath);
 		}

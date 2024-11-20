@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService {
 		log.info("Random 6-digit number: " + randNum);
 		String otp = String.valueOf(randNum);
 		storeOtp.setOtp(otp);
+		// Generate a 6-digit OTP
 
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth","true");
@@ -104,8 +105,17 @@ public class UserServiceImpl implements UserService {
 					new InternetAddress(email)
 			});
 
+			String htmlContent = "<div style='font-family:Arial,sans-serif;'>"
+					+ "<h2 style='color:#4CAF50;'>Your OTP Code</h2>"
+					+ "<p>Please use the following One-Time Password to complete your verification:</p>"
+					+ "<p style='font-size:24px;color:#FF5722;font-weight:bold;'>" + msg + "</p>"
+					+ "<p>This OTP is valid for 10 minutes. Do not share it with anyone.</p>"
+					+ "</div>";
+
+			message.setContent(htmlContent, "text/html");
+
 			message.setSubject("Luxury Hotel (PVT) LTD");
-			message.setText(msg);
+			message.setContent(htmlContent,"text/html");
 
 			return message;
 

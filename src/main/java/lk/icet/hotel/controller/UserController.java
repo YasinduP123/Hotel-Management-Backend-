@@ -52,11 +52,8 @@ public class UserController {
 	public List<User> get(@RequestParam(required = false) String email){
 
 		if (email != null) {
-			List<User> byEmail = userService.findByEmail(email);
-			System.out.println(byEmail);
-			return byEmail;
+			return userService.findByEmail(email);
 		}
-
 		return userService.getAll();
 	}
 
