@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -105,17 +104,90 @@ public class UserServiceImpl implements UserService {
 					new InternetAddress(email)
 			});
 
-			String htmlContent = "<div style='font-family:Arial,sans-serif;'>"
-					+ "<h2 style='color:#4CAF50;'>Your OTP Code</h2>"
-					+ "<p>Please use the following One-Time Password to complete your verification:</p>"
-					+ "<p style='font-size:24px;color:#FF5722;font-weight:bold;'>" + msg + "</p>"
-					+ "<p>This OTP is valid for 10 minutes. Do not share it with anyone.</p>"
-					+ "</div>";
-
+			String htmlContent = "<!DOCTYPE html>" +
+					"<html>" +
+					"<head>" +
+					"    <style>" +
+					"        body {" +
+					"            font-family: Arial, sans-serif;" +
+					"            margin: 0;" +
+					"            padding: 0;" +
+					"            background-color: #f4f4f4;" +
+					"        }" +
+					"        .email-container {" +
+					"            max-width: 600px;" +
+					"            margin: 20px auto;" +
+					"            background-color: #ffffff;" +
+					"            border-radius: 10px;" +
+					"            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" +
+					"            overflow: hidden;" +
+					"        }" +
+					"        .header {" +
+					"            background-color: #1e2a78;" +
+					"            color: #ffffff;" +
+					"            text-align: center;" +
+					"            padding: 20px 10px;" +
+					"        }" +
+					"        .header h1 {" +
+					"            margin: 0;" +
+					"            font-size: 28px;" +
+					"        }" +
+					"        .body {" +
+					"            padding: 20px;" +
+					"            color: #ffffff;" +
+					"            background-color: black;" +
+					"            line-height: 1.6;" +
+					"        }" +
+					"        .otp-box {" +
+					"            display: inline-block;" +
+					"            background-color: #28005f;" +
+					"            border: 1px dashed #ffffff;" +
+					"            color: #ffffff;" +
+					"            font-weight: bold;" +
+					"            font-size: 24px;" +
+					"            padding: 10px 20px;" +
+					"            border-radius: 8px;" +
+					"            margin: 10px 0;" +
+					"        }" +
+					"        .footer {" +
+					"            background-color: #1e2a78;" +
+					"            color: #ffffff;" +
+					"            text-align: center;" +
+					"            padding: 10px;" +
+					"            font-size: 14px;" +
+					"        }" +
+					"        .footer a {" +
+					"            color: #ffffff;" +
+					"            text-decoration: underline;" +
+					"        }" +
+					"        .footer a:hover {" +
+					"            color: #cccccc;" +
+					"        }" +
+					"    </style>" +
+					"</head>" +
+					"<body>" +
+					"    <div class=\"email-container\">" +
+					"        <div class=\"header\">" +
+					"            <h1>Welcome to Luxury Grand Hotel</h1>" +
+					"            <p>Your exclusive stay experience awaits!</p>" +
+					"        </div>" +
+					"        <div class=\"body\" style=\"color:#ffffff\">" +
+					"            <p style=\"color:#ffffff\">Dear Guest,</p>" +
+					"            <p style=\"color:#ffffff\">We are excited to have you with us. To complete your verification, please use the One-Time Password (OTP) below:</p>" +
+					"            <p style=\"color:#ffffff\" class=\"otp-box\">" + msg + "</p>" +
+					"            <p style=\"color:#ffffff\">If you did not request this OTP, please contact us immediately.</p>" +
+					"            <p style=\"color:#ffffff\">Warm regards,<br>The Luxury Grand Hotel Team</p>" +
+					"        </div>" +
+					"        <div class=\"footer\">" +
+					"            <p>&copy; 2024 Luxury Grand Hotel | All Rights Reserved</p>" +
+					"            <p>Need help? <a href=\"mailto:support@luxurygrandhotel.com\">Contact Us</a></p>" +
+					"        </div>" +
+					"    </div>" +
+					"</body>" +
+					"</html>";
 			message.setContent(htmlContent, "text/html");
-
 			message.setSubject("Luxury Hotel (PVT) LTD");
-			message.setContent(htmlContent,"text/html");
+
 
 			return message;
 
