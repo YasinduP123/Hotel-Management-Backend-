@@ -3,6 +3,7 @@ package lk.icet.hotel.service;
 
 import lk.icet.hotel.dto.Booking;
 
+import java.util.HashSet;
 import java.util.List;
 
 public interface BookingService {
@@ -13,7 +14,7 @@ public interface BookingService {
 
 	void updateBooking(Booking booking);
 
-	List<Booking> findById(Long id);
+	HashSet<Booking> findById(Long id);
 
 	void deleteById(Long bookingId);
 

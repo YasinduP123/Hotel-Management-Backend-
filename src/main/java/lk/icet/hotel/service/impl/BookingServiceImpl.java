@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Slf4j
@@ -42,8 +43,8 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public List<Booking> findById(Long id) {
-		List<Booking> bookingList = new ArrayList<>();
+	public HashSet<Booking> findById(Long id) {
+		HashSet<Booking> bookingList = new HashSet<>();
 		bookingList.add(mapper.map(bookingRepository.findById(id), Booking.class));
 		return bookingList;
 	}

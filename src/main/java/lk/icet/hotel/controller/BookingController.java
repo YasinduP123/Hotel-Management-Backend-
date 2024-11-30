@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -29,7 +30,7 @@ public class BookingController {
 	public List<Booking> getBookings(@RequestParam(required = false) Long id , String roomType , Integer month, Integer year){
 
 		if (id != null) {
-			return bookingService.findById(id);
+			return new ArrayList<>(bookingService.findById(id));
 		}else if(roomType != null){
 			return bookingService.findByCategory(roomType);
 		} else if (month != null || year != null) {

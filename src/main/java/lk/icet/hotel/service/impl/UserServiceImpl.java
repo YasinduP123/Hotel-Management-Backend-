@@ -180,7 +180,7 @@ public class UserServiceImpl implements UserService {
 					"        </div>" +
 					"        <div class=\"footer\">" +
 					"            <p>&copy; 2024 Luxury Grand Hotel | All Rights Reserved</p>" +
-					"            <p>Need help? <a href=\"mailto:support@luxurygrandhotel.com\">Contact Us</a></p>" +
+					"            <p>Need help? <a href=\"mailto:yasindupathiraja10@gmail.com\">Contact Us</a></p>" +
 					"        </div>" +
 					"    </div>" +
 					"</body>" +
